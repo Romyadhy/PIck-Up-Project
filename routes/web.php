@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CoorController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,15 @@ Route::get('/', function () {
 
 Route::get('/globe', [CoorController::class, 'getCoor']);
 
+Route::get('/landing', [LandingController::class, 'index']);
+
+
 Route::get('/maps', function (){
     return view('frontpage.maps');
 });
+
+
+
 
 
 // Route::get('/dashboard', function () {
