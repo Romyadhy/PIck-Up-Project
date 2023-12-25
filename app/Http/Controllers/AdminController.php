@@ -14,8 +14,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $picups = Picup::all();
+        $picups = Picup::paginate(4);
         // dd($picups);
+
+        // $picups = $picup->paginate(5);
 
         return view('backpage.admin', compact('picups'));
     }
@@ -49,8 +51,6 @@ class AdminController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);   
 
-
-
             $picups =  Picup::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -59,9 +59,6 @@ class AdminController extends Controller
                 'latitude' => $data['latitude'],
                 'longitude' => $data['longitude'],
                 'image' => ''
-                
-
-                
             ]);
 
             
@@ -94,7 +91,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $picups = Picup::findOrFail($id);
+        // dd($picups);
+        return view('backpage.edit', compact('picups'));
     }
 
     /**
@@ -106,7 +105,38 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'address' => 'required',
+            'no_tlp' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+    
+        $picups = Picup::findOrFail($id);
+        $picups->fill($data);   
+    
+        // if ($request->hasFile('image')) {
+        //     $request->file('image')->move('images/', $request->file('image')->getClientOriginalName());
+        //     $picups->image = $request->file('image')->getClientOriginalName();
+        // }
+
+        if ($request->hasFile('image')) {
+            $existingImage = $picups->image;
+            if ($existingImage && file_exists(public_path('images/' . $existingImage))) {
+                unlink(public_path('images/' . $existingImage)); // Hapus gambar lama jika ada
+            }
+    
+            $imageName = time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('images'), $imageName);
+            $picups->image = $imageName;
+        }
+    
+        $picups->save();
+    
+        return redirect()->route('admin.index')->with('success', 'Data updated successfully.');
     }
 
     /**
@@ -117,6 +147,15 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $picups = Picup::findOrFail($id);
+    
+    // Hapus gambar terkait jika ada sebelum menghapus data Picup
+    if ($picups->image && file_exists(public_path('images/' . $picups->image))) {
+        unlink(public_path('images/' . $picups->image));
+    }
+    
+    $picups->delete();
+
+    return redirect()->route('admin.index')->with('success', 'Data deleted successfully.');
     }
 }

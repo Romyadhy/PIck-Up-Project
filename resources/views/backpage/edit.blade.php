@@ -1,14 +1,15 @@
 @extends('layouts.indexAdmin')
 @section('content')
-<title>Create Pages</title>
+<title>Edit Pages</title>
 <section class="min-h-screen bg-gray-900">
     <div class="max-w-2xl mx-auto py-6 sm:px-6 lg:px-8 ">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <h1 class="text-2xl font-semibold mb-4">Create Data</h1>
+                <h1 class="text-2xl font-semibold mb-4"> Edit Data</h1>
 
-                <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.update',  $picups->id) }}" enctype="multipart/form-data" method="POST">
                     @csrf
+                    @method('PUT')
 
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
