@@ -11,4 +11,14 @@ class LandingController extends Controller
         $picups = Picup::all();
         return view ('frontpage.index', compact('picups'));
     }
+
+    public function show($id)
+    {
+        $picup = Picup::findOrFail($id);
+        $picups = Picup::where('id', $id)->get(); 
+
+        // dd($picDes);
+        return view('frontpage.detail', compact('picups', 'picup'));
+    }
+
 }

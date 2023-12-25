@@ -39,12 +39,13 @@
                 </div> --}}
             </div>
 
-            <section class="grid md:grid-cols-3 grid-cols-2 gap-6 text-center mx-[5rem]">
+            <section class="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-6 text-center mx-[5rem]">
+                
                 
                 @foreach ($picups as $picup)
                 <div class="bg-white shadow rounded overflow-hidden group">
                     <div class="relative">
-                        <img src="https://s4.bukalapak.com/bukalapak-kontenz-production/content_attachments/62809/original/suzuki_mega_carry.jpg" alt="product 1" class="w-full">
+                        <img src="https://s4.bukalapak.com/bukalapak-kontenz-production/content_attachments/62809/original/suzuki_mega_carry.jpg" alt="product" class="w-full">
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
                         justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                             <a href="#"
@@ -62,13 +63,13 @@
                     <div class="pt-4 pb-3 px-4">
                         <a href="#">
                             <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                                {{ $picup['nama'] }}
+                                {{ $picup['name'] }}
                             </h4>
                         </a>
-                        <div class="flex items-baseline mb-1 space-x-2">
-                            <p class="text-xl text-primary font-semibold text-gray-500">Rp {{ $picup['harga'] }}</p>
-                            {{-- <p class="text-sm text-gray-400 line-through">RP.20.000</p> --}}
-                        </div>
+                        {{-- <div class="flex items-baseline mb-1 space-x-2">
+                            <p class="text-xl text-primary font-semibold text-gray-500">Rp {{ $picup['price'] }}</p>
+                            
+                        </div> --}}
                         {{-- <div class="flex items-center">
                             <div class="flex gap-1 text-sm text-yellow-400">
                                 <span><i class="fa-solid fa-star">1</i></span>
@@ -79,16 +80,16 @@
                             </div>
                         </div> --}}
                     </div>
-                    <a href="{{url('/detail')}}"
-                        class="block w-full py-1 text-center text-black bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">See Detail</a>
+                    <a href="{{ route('detil.show', $picup->id) }}"
+                        class="block w-full py-1 text-center text-black bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition hover:bg-gray-500">See Detail</a>
                 </div>
                @endforeach
             
             </section>
         </div>
-        <!-- ./products -->
+        
     </div>
-    <!-- ./shop wrapper -->
+    
 </section>
 
     

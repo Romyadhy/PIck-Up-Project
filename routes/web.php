@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::get('/globe', [CoorController::class, 'getCoor']);
 
 Route::get('/landing', [LandingController::class, 'index']);
+Route::get('/detail/{id}', [LandingController::class, 'show'])->name('detil.show');
 
 
 Route::get('/maps', function (){

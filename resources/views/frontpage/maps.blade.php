@@ -124,7 +124,7 @@
     
 
 
-    <script>
+<script>
 
         
         const map = L.map('map').setView([-8.409518, 115.188919], 10); // Centered around Bali
@@ -191,7 +191,7 @@
             priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Total price: Rp ${totalPrice.toFixed(2)}`;
         }
 
-// Memasang event listener untuk menangkap klik pengguna
+        // Memasang event listener untuk menangkap klik pengguna
         map.on('click', onMapClick);
 
 
@@ -260,7 +260,7 @@
         // Terrain: p;
 
 
-    </script>
+</script>
 </body>
 
 </html>
