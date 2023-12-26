@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('frontpage.index');
+    return view('frontpage.landing');
 });
 
 Route::get('/globe', [CoorController::class, 'getCoor']);

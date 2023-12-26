@@ -33,6 +33,9 @@
     <!-- Pemanggilan Leaflet Routing Machine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
 
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 
     <style>
         /* Any additional styles can go here */
@@ -66,7 +69,7 @@
     @include('components.navLanding')
     @yield("content")
    
-    {{-- @include('component.footerLanding') --}}
+    @include('components.footerLanding')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>

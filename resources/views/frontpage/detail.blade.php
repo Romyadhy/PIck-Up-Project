@@ -32,6 +32,9 @@
     <!-- Pemanggilan Leaflet Routing Machine -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-routing-machine/3.2.12/leaflet-routing-machine.min.js"></script>
 
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
     <style>
         /* Any additional styles can go here */
@@ -42,10 +45,15 @@
         }
     </style>
 </head>
-<body>
-    <section class="bg-white dark:bg-gray-900 min-h-screen">
+<body class="min-h-screen dark:bg-gray-900">
+    <section class="mt-4">
+        <div class="text-white mx-[5rem] ">
+            <a href="{{ url('/landing') }}">
+                <i class="fas fa-arrow-left"></i> <!-- Ikon panah kembali -->
+            </a>
+        </div>
         <div class="">
-            <h1 class="font-bold text-center text-5xl text-white pt-8">Detail Product</h1>
+            <h1 class="font-bold text-center text-5xl text-white">Detail Product</h1>
         </div>
         
         <div class="container px-6 py-16 mx-auto text-center">
@@ -58,8 +66,8 @@
                     <p class="mt-3 text-sm text-gray-400 ">Info Contack {{ $picup->no_tlp }}</p>
                     <p class="mt-3 text-sm text-gray-400 "> {{ $picup->latitude }}</p>
                     <p class="mt-3 text-sm text-gray-400 "> {{ $picup->longitude }}</p>
-                    
-                    <div class="flex justify-center mt-10">
+                    <p class="mt-3 text-sm text-white">Picture</p>
+                    <div class="flex justify-center mt-4">
                         <img class="object-cover w-full h-96 rounded-xl lg:w-4/5" src="{{ asset('images/'.$picup->image) }}" alt="imageProduct" />
                     </div>
                 @endif
@@ -68,7 +76,11 @@
     
         </div>
 
+        <div class="text-white mb-4 text-center">
+            <h2 class="font-semibold">See Location on Map</h2>
+        </div>
         <section class="flex item-center justify-center ">
+           
             <div id="map" class="max-w-full"></div>
             {{-- <div id="info" class="bg-gray-800 text-white p-4 text-center m-4">
                 <h2 class="text-2xl">Price Info</h2>
@@ -91,7 +103,7 @@
 <script>
 
         
-        const map = L.map('map').setView([-8.409518, 115.188919], 10); // Centered around Bali
+        const map = L.map('map').setView([parseFloat({{ $picup->latitude }}), parseFloat({{ $picup->longitude }})], 12); // Centered around Bali
 
         L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
             maxZoom: 20,
