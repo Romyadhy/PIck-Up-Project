@@ -171,6 +171,49 @@
         //     priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Total price: Rp ${totalPrice.toFixed(2)}`;
         // }
 
+
+    //     {{-- 
+    // <form>
+    //     <label for="messageSelect">Pilih Pesan:</label>
+    //     <select id="messageSelect" name="messageSelect">
+    //         <option value="pesan1">Pesan 1</option>
+    //         <option value="pesan2">Pesan 2</option>
+    //         <option value="pesan3">Pesan 3</option>
+    //     </select>
+    //     <br><br>
+    //     <button onclick="redirectToWhatsApp()">Pesan via WhatsApp</button>
+    // </form>
+    
+    // <script>
+    //     function redirectToWhatsApp() {
+    //         var selectedMessage = document.getElementById('messageSelect').value;
+    //         var phoneNumber = '6283115942123'; // Ganti dengan nomor telepon yang valid
+    
+    //         var messageText = '';
+    
+    //         // Tentukan pesan yang sesuai berdasarkan pilihan select box
+    //         switch (selectedMessage) {
+    //             case 'pesan1':
+    //                 messageText = 'Pesan untuk pilihan 1';
+    //                 break;
+    //             case 'pesan2':
+    //                 messageText = 'Pesan untuk pilihan 2';
+    //                 break;
+    //             case 'pesan3':
+    //                 messageText = 'Pesan untuk pilihan 3';
+    //                 break;
+    //             default:
+    //                 messageText = 'Pesan default jika tidak ada pilihan yang dipilih';
+    //         }
+    
+    //         // Encode pesan ke dalam URI dan buat URL WhatsApp
+    //         var encodedMessage = encodeURIComponent(messageText);
+    //         var whatsappURL = 'https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodedMessage;
+    
+    //         // Redirect ke URL WhatsApp
+    //         window.open(whatsappURL, '_blank');
+    //     }
+    //
        
 
 

@@ -36,6 +36,12 @@
     <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    {{-- Geo Code --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
     <style>
         /* Any additional styles can go here */
@@ -46,7 +52,7 @@
         }
     </style>
 
-    <style>
+    {{-- <style>
         /* Gaya untuk info box */
         .leaflet-routing-container {
             background-color: white; /* Latar belakang putih */
@@ -60,7 +66,7 @@
             border: 1px solid #ccc; /* Border abu-abu */
             padding: 5px; /* Padding untuk konten */
         }
-    </style>
+    </style> --}}
 
 </head>
 
@@ -73,6 +79,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
 </body>
 
 </html>
