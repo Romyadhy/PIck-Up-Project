@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('picups', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('maps_id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('address');
-            $table->string('no_tlp');
-            $table->timestamps();
+            // $table->id();
+            // $table->foreignId('maps_id');
+            // $table->string('name');
+            // $table->string('description');
+            // $table->string('address');
+            // $table->string('no_tlp');
+            // $table->timestamps();
         });
     }
 

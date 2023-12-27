@@ -9,16 +9,12 @@ class Maps extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'latitude',
-        'longitude'
+    // protected $fillable = [
+    //     'name',
+    //     'latitude',
+    //     'longitude'
         
-    ];
+    // ];
 
 
-    public function picup()
-    {
-        return $this->belongsTo(Picup::class, 'maps_id', 'picup_id');
-    }
 }
