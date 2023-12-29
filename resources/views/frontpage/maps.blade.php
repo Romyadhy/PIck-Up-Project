@@ -96,22 +96,6 @@
             
             });
 
-            // Tambahkan fitur pencarian (search)
-            // const searchControl = L.Control.geocoder({
-            //     defaultMarkGeocode: false,
-            //     geocoder: L.Control.Geocoder.nominatim(),
-            //     placeholder: 'Search...', // Text placeholder untuk pencarian
-            //     collapsed: true, // Menunjukkan apakah pencarian dikembangkan secara default
-            //     position: 'topright', // Atur posisi tombol pencarian
-            //     showResultIcons: true, // Menampilkan ikon hasil pencarian
-            //     defaultMarkGeocode: false, // Menonaktifkan penanda default
-            //     icon: L.divIcon({
-            //         className: '<i class="fas fa-search"></i>', // Kelas untuk ikon Ionicons
-            //         iconSize: [30, 30], // Ukuran ikon
-            //         iconAnchor: [15, 15], // Anchor point dari ikon
-            //     }),
-            // }).addTo(map);
-
             const searchControl = L.Control.geocoder({
                 defaultMarkGeocode: false,
                 geocoder: L.Control.Geocoder.nominatim(),
@@ -208,20 +192,20 @@
 
         // Memasang event listener untuk menangkap klik pengguna pada map
         map.on('click', onMapClick);
-        var geocoder = L.Control.geocoder({
-            defaultMarkGeocode: false
-            })
-            .on('markgeocode', function(e) {
-                var bbox = e.geocode.bbox;
-                var poly = L.polygon([
-                bbox.getSouthEast(),
-                bbox.getNorthEast(),
-                bbox.getNorthWest(),
-                bbox.getSouthWest()
-                ]).addTo(map);
-                map.fitBounds(poly.getBounds());
-            })
-            .addTo(map);
+        // var geocoder = L.Control.geocoder({
+        //     defaultMarkGeocode: false
+        //     })
+        //     .on('markgeocode', function(e) {
+        //         var bbox = e.geocode.bbox;
+        //         var poly = L.polygon([
+        //         bbox.getSouthEast(),
+        //         bbox.getNorthEast(),
+        //         bbox.getNorthWest(),
+        //         bbox.getSouthWest()
+        //         ]).addTo(map);
+        //         map.fitBounds(poly.getBounds());
+        //     })
+        //     .addTo(map);
 
 
 

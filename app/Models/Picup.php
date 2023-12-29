@@ -19,6 +19,7 @@ class Picup extends Model
         'latitude',
         'longitude',
         'image',
+        'category'
 
     ];
 

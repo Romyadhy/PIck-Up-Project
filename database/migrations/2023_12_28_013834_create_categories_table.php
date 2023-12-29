@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('maps', function (Blueprint $table) {
-            // $table->id();
-            // $table->string('name');
-            // $table->string('latitude');
-            // $table->string('longitude');
-            // $table->timestamps();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->float('price_per_km', 8, 3); // Harga per kilometer
+            $table->timestamps();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('maps');
+        Schema::dropIfExists('categories');
     }
 };

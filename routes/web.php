@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\birjonTesControlller;
 use App\Http\Controllers\CoorController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\tescontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +22,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/tes', function () {
     return view('welcome');
 });
+
+// Route::get('/brodihisril', function () {
+//     return view('tes.landingtes');
+// });
+
+Route::get('/birjon', [tescontroller::class, 'index']);
+
+
 Route::get('/', function () {
     return view('frontpage.landing');
 });
 
+Route::get('/tesCoor', [tescontroller::class, 'tesCoor']);
 Route::get('/globe', [CoorController::class, 'getCoor']);
 
 Route::get('/landing', [LandingController::class, 'index']);
@@ -35,7 +46,7 @@ Route::get('/maps', function (){
 });
 
 
-
+Route::resource('/birjonAdmin', birjonTesControlller::class);
 
 
 Route::get('/dashboard', function () {

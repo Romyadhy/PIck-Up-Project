@@ -35,6 +35,12 @@
     <!-- Font Awesome CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+     {{-- Geo Code --}}
+     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css"/>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
 
     <style>
         /* Any additional styles can go here */
@@ -43,6 +49,30 @@
             width: 600px;
             height: 400px;
         }
+
+         /* Gaya untuk info box */
+    .leaflet-routing-container {
+        background-color: white; /* Latar belakang putih */
+        border: 1px solid #ccc; /* Border abu-abu */
+        padding: 10px; /* Padding untuk konten */
+    }
+
+    /* Gaya untuk petunjuk rute */
+    .leaflet-routing-instructions {
+        background-color: white; /* Latar belakang putih */
+        border: 1px solid #ccc; /* Border abu-abu */
+        padding: 5px; /* Padding untuk konten */
+    }
+
+    /* Gaya untuk tombol fullscreen */
+    .fullscreen-button {
+        border: 2px solid #000;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #000;
+        cursor: pointer;
+        border-radius: 5px;
+    }
     </style>
 </head>
 <body class="min-h-screen dark:bg-gray-900">
@@ -66,9 +96,10 @@
                     <p class="mt-3 text-sm text-gray-400 ">Info Contack {{ $picup->no_tlp }}</p>
                     <p class="mt-3 text-sm text-gray-400 "> {{ $picup->latitude }}</p>
                     <p class="mt-3 text-sm text-gray-400 "> {{ $picup->longitude }}</p>
+                    <p class="mt-3 text-sm text-gray-400 "> {{ $picup->category }}</p>
                     <p class="mt-3 text-sm text-white">Picture</p>
                     <div class="flex justify-center mt-4">
-                        <img class="object-cover w-full h-96 rounded-xl lg:w-4/5" src="{{ asset('images/'.$picup->image) }}" alt="imageProduct" />
+                        <img class="object-cover w-1/2 h-96 rounded-xl lg:w-full" src="{{ asset('images/'.$picup->image) }}" alt="imageProduct" />
                     </div>
                 @endif
                 
@@ -80,13 +111,19 @@
             <h2 class="font-semibold">See Location on Map</h2>
         </div>
         <section class="flex item-center justify-center ">
-           
-            <div id="map" class="max-w-full"></div>
-            {{-- <div id="info" class="bg-gray-800 text-white p-4 text-center m-4">
-                <h2 class="text-2xl">Price Info</h2>
+            <div id="map" class="max-w-full "></div>
+            <div id="info" class="bg-white p-2 mx-4">
+                <h2 class="text-2xl font-bold">Price Info</h2>
                 <p id="price" class="font-bold"></p>
-            </div> --}}
+                <p id="startEndInfo" class="text-sm"></p>
+                <p id="routeInfo" class="text-sm"></p>
+            </div>
+            
         </section>
+
+        <div class="flex items-center justify-center my-4">
+            <button class="px-5 py-2  text-sm font-medium leading-5 text-center text-black capitalize bg-white rounded-lg hover:bg-slate-200 lg:mx-0 lg:w-auto focus:outline-none " onclick="fullScreen()">See in Fullscreen</button>
+        </div>
 
         <div class="flex item-center justify-center">
             <button class="px-5 py-2 my-12 text-sm font-medium leading-5 text-center text-white capitalize bg-blue-600 rounded-lg hover:bg-blue-500 lg:mx-0 lg:w-auto focus:outline-none ">
@@ -98,6 +135,12 @@
         
 
     </section>  
+
+
+    <script src="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 
 
 <script>
@@ -114,62 +157,125 @@
         L.marker([parseFloat({{ $picup->latitude }}), parseFloat({{ $picup->longitude }})]).addTo(map)
     .bindPopup('<b>Picup</b> Car').openPopup();
 
-    
-        // L.Routing.control({
-        //     waypoints: [
-        //         L.latLng(-8.10454492003413,115.2008184367877), // Titik awal
-        //         L.latLng(-8.12439942643114,115.1059073618016)  // Titik akhir (dengan longitude yang berbeda)
+        // SCALE
+        L.control.scale().addTo(map);
+        // FULLSCREEN
+        var mapId = document.getElementById('map');
+        function fullScreen(){
+            mapId.requestFullscreen();
+        }
+
+        const searchControl = L.Control.geocoder({
+                defaultMarkGeocode: false,
+                geocoder: L.Control.Geocoder.nominatim(),
+                placeholder: 'Search...', // Teks placeholder untuk pencarian
+                collapsed: true, // Apakah kotak pencarian diperkecil secara default
+                position: 'topright', // Atur posisi tombol pencarian
+                showResultIcons: true, // Tampilkan ikon hasil pencarian
+                defaultMarkGeocode: false, // Nonaktifkan marka default
+            }).addTo(map);
+
+            // Tambahkan ikon Font Awesome ke dalam kotak pencarian
+            const searchIcon = L.DomUtil.create('div', 'leaflet-routing-icon leaflet-bar-part leaflet-bar-part-top-and-bottom fas fa-search');
+            searchControl.getContainer().firstChild.appendChild(searchIcon);
+
+              //Tes tt
+        let startMarker, endMarker, routingControl;
+
+        function onMapClick(e) {
+            if (!startMarker) {
+                startMarker = L.marker(e.latlng).addTo(map);
+                startMarker.on('dragend', calculateRoute);
+            } else if (!endMarker) {
+                endMarker = L.marker(e.latlng).addTo(map);
+                endMarker.on('dragend', calculateRoute);
+                calculateRoute();
+            } else {
+                map.removeControl(routingControl);
+                startMarker.setLatLng(e.latlng);
+                endMarker = null;
+            }
+        }
+
+        function calculateRoute() {
+            if (startMarker && endMarker) {
+                const waypoints = [
+                    startMarker.getLatLng(), // Titik awal
+                    endMarker.getLatLng()   // Titik akhir
+                ];
+
+                // Hapus rute sebelumnya jika ada
+                if (routingControl) {
+                    map.removeControl(routingControl);
+                }
+
+                // Membuat objek Routing Control dengan waypoints yang telah ditentukan
+                routingControl = L.Routing.control({
+                    waypoints: waypoints,
+                    routeWhileDragging: true // Memperbarui rute saat marker digeser
+                }).addTo(map);
+
+                // Ambil koordinat titik awal dan akhir
+                const startPoint = startMarker.getLatLng();
+                const endPoint = endMarker.getLatLng();
+
+                // Tambahkan informasi titik awal dan akhir ke dalam info box
+                const startEndInfo = document.getElementById('startEndInfo');
+                startEndInfo.innerHTML = `Start Point: Lat ${startPoint.lat}, Lng ${startPoint.lng}<br>End Point: Lat ${endPoint.lat}, Lng ${endPoint.lng}`;
+
                 
-        //     ],
-        // }).addTo(map);
 
-        // let startMarker, endMarker;
+                // Event listener untuk menangkap rute yang dipilih
+                routingControl.on('routesfound', function (e) {
+                    const routes = e.routes;
+                    const route = routes[0]; // Mengambil rute pertama (dalam kasus satu rute)
 
-        // function onMapClick(e) {
-        //     if (!startMarker) {
-        //         startMarker = L.marker(e.latlng).addTo(map);
-        //         startMarker.on('dragend', calculateDistance);
-        //     } else if (!endMarker) {
-        //         endMarker = L.marker(e.latlng).addTo(map);
-        //         endMarker.on('dragend', calculateDistance);
-        //         calculateDistance();
-        //         // Create route between start and end points
-        //         L.Routing.control({
-        //             waypoints: [
-        //                 startMarker.getLatLng(), // Titik awal
-        //                 endMarker.getLatLng()   // Titik akhir
-        //             ],
-        //         }).addTo(map);
-        //     } else {
-        //         // Jika sudah ada titik awal dan akhir, ganti titik awal dan hapus rute lama
-        //         map.removeControl(map.routingControl);
-        //         startMarker.setLatLng(e.latlng);
-        //         endMarker = null;
-        //     }
-        // }
-        // function calculateDistance() {
-        //     const startPoint = startMarker.getLatLng();
-        //     const endPoint = endMarker.getLatLng();
+                    const pricePerKilometer = 10; // Ganti dengan harga per kilometer yang diinginkan
 
-        //     const R = 6371; // Radius of the Earth in kilometers
-        //     const latDiff = (endPoint.lat - startPoint.lat) * (Math.PI / 180);
-        //     const lonDiff = (endPoint.lng - startPoint.lng) * (Math.PI / 180);
-        //     const a =
-        //         Math.sin(latDiff / 2) * Math.sin(latDiff / 2) +
-        //         Math.cos(startPoint.lat * (Math.PI / 180)) * Math.cos(endPoint.lat * (Math.PI / 180)) *
-        //         Math.sin(lonDiff / 2) * Math.sin(lonDiff / 2);
-        //     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        //     const distance = R * c; // Distance in kilometers
+                    const distance = route.summary.totalDistance / 1000; // Jarak dalam kilometer
+                    const totalPrice = distance * pricePerKilometer;
 
-        //     // Harga per kilometer
-        //     const pricePerKilometer = 10.000; // Ganti dengan harga per kilometer yang diinginkan
+                    
 
-        //     // Hitung total harga berdasarkan jarak
-        //     const totalPrice = distance * pricePerKilometer;
+                    // Tampilkan informasi harga
+                    const priceInfo = document.getElementById('price');
+                    priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Total price: Rp ${totalPrice.toFixed(2)}`;
+                });
+                // Menghapus marker jika sudah ada sebelumnya
+                if (startMarker) {
+                    map.removeLayer(startMarker);
+                    startMarker = null;
+                }
+                if (endMarker) {
+                    map.removeLayer(endMarker);
+                    endMarker = null;
+                }
+            }
+        }
 
-        //     const priceInfo = document.getElementById('price');
-        //     priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Total price: Rp ${totalPrice.toFixed(2)}`;
-        // }
+        // Memasang event listener untuk menangkap klik pengguna pada map
+        map.on('click', onMapClick);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //     {{-- 
@@ -218,7 +324,7 @@
 
 
 </script>
-    
+
 </body>
 </html>
 
