@@ -11,7 +11,7 @@ class Pick extends Model
 
     protected $table = 'pickups';
 
-    protected $fillable = ['name', 'description', 'address', 'no_tlp', 'latitude', 'longitude', 'image', 'category_id'];
+    protected $fillable = ['name', 'description', 'address', 'no_tlp', 'latitude', 'longitude', 'image', 'category_id', 'start_time', 'end_time'];
 
     public function category()
     {

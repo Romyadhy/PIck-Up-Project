@@ -7,10 +7,10 @@
                     <h2 class="font bold text-2xl text-gray-200">Picup<span class="text-gray-500">Pal</span></h2>
                 </a>
                 <a href="{{ url('/') }}" class="text-gray-200 hover:text-white transition">Home</a>
-                <a href="{{ url('/landing') }}" class="text-gray-200 hover:text-white transition">Product</a>
-                <a href="{{url('/maps')}}" class="text-gray-200 hover:text-white transition">Maps</a>
+                <a href="{{ url('/birjonFront') }}" class="text-gray-200 hover:text-white transition">Product</a>
+                <a href="{{url('/birjon')}}" class="text-gray-200 hover:text-white transition">Maps</a>
                 <a href="{{ url('/#about') }}" class="text-gray-200 hover:text-white transition">About us</a>
-                <a href="" class="text-gray-200 hover:text-white transition">Contact us</a>
+                {{-- <a href="" class="text-gray-200 hover:text-white transition">Contact us</a> --}}
             </div>
             <div class="w-full max-w-xl relative flex mr-4">
                 <span class="absolute left-4 top-3 text-lg text-gray-400">

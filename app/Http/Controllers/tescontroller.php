@@ -18,7 +18,42 @@ class tescontroller extends Controller
     }
 
     public function tesCoor(){
-        $coordinate = Pick::select('latitude', 'longitude', 'name', 'address')->get();
+        $coordinate = Pick::select('latitude', 'longitude', 'name', 'address', 'image')->get();
         return response()->json($coordinate);
        }
+
+    public function display(){
+        $pic = Pick::with('category')->get();
+        // dd($pic);
+        return view('tes.displayPick', compact('pic'));
+    }
+
+    public function show($id)
+    {
+        // Temukan post berdasarkan ID
+        $pick = Pick::findOrFail($id);
+        $picups = Pick::where('id', $id)->get();
+
+        // Jika post tidak ditemukan
+        if (!$pick) {
+            return abort(404);
+        }
+        // dd($pick);
+
+        // Tampilkan view dengan data post
+        return view('tes.detailSee', compact('pick'));
+    }
+
+    // public function getNow()
+    // {
+    //     // Lakukan pengecekan otentikasi
+    //     if (auth()->check()) {
+    //         $pick = Pick::all();
+    //         // Jika terotentikasi, lakukan aksi yang diperlukan
+    //         return view('tes.detailSee', compact('pick'));
+    //     } else {
+    //         // Jika tidak terotentikasi, redirect ke halaman login
+    //         return redirect()->route('login');
+    //     }
+    // }
 }

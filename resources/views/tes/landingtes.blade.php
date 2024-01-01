@@ -22,19 +22,25 @@
 
 </head>
 <section class="min-h-screen">
+    <div class="text-center my-8">
+        <h1 class="font-bold text-3xl my-2">Maps All Pickup</h1>
+        <p class="italic text-slate-500">To see the price you can choose the category in button and choose start point and end point in maps.</p>
+    </div>
+
     
     <div class="flex items-center justify-center my-4">
-        <label for="category" class="mr-2">Choose a Category:</label>
-        <select id="category" onchange="updatePrice()">
+        <label for="category" class="mr-2 font-semibold">Choose Category:</label>
+        <select id="category" onchange="updatePrice()" class="border-2 rounded-md px-4 py-2 bg-white text-gray-800 focus:outline-none focus:border-blue-500">
             <option value="">Select Category</option>
             @foreach($tes as $category)
-            
-                <option value="{{ $category->id }}" data-price="{{ $category->price_per_km }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" data-price="{{ $category->price_per_km }}" class="py-2">{{ $category->name }}</option>
             @endforeach
         </select>
-
     </div>
     
+    {{-- <div id="clearButton" class="leaflet-bar leaflet-control leaflet-control-custom">
+        <button onclick="clearMarkers()">Clear Markers</button>
+    </div> --}}
 
     <section class="flex item-center justify-center my-12">
         <div id="map" class="max-w-full "></div>
@@ -51,11 +57,17 @@
     </div>
     </section>
 
+    {{-- <button onclick="fullScreen()">Fullscreen</button> --}}
+
+
     <!-- Tambahkan box untuk drag marker -->
 
     <div class="flex items-center justify-center my-4">
         <button class="px-5 py-2  text-sm font-medium leading-5 text-center text-black capitalize bg-white rounded-lg hover:bg-slate-200 lg:mx-0 lg:w-auto focus:outline-none " onclick="fullScreen()">See in Fullscreen</button>
     </div>
+
+    
+    
 
     
     
@@ -71,23 +83,23 @@
             const map = L.map('map').setView([-8.409518, 115.188919], 10); // Centered around Bali
 
             L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
-                maxZoom: 20,
+                maxZoom: 50,
                 subdomains:['mt0','mt1','mt2','mt3']
             }).addTo(map);
 
             // Tambahkan kontrol layer
             const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
+                maxZoom: 50,
                 attribution: '&copy; OpenStreetMap contributors'
             });
 
             const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                maxZoom: 17,
+                maxZoom: 50,
                 attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             });
 
             const terrainLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                maxZoom: 17,
+                maxZoom: 50,
                 attribution: 'Map data: &copy; OpenTopoMap contributors'
             });
 
@@ -101,6 +113,7 @@
             // Tambahkan kontrol layers ke peta
             L.control.layers(baseLayers).addTo(map);
 
+           
 
 
 
@@ -109,11 +122,45 @@
 
             // SCALE
             L.control.scale().addTo(map);
-            // FULLSCREEN
+            // // FULLSCREEN
+            
             var mapId = document.getElementById('map');
             function fullScreen(){
                 mapId.requestFullscreen();
             }
+
+          
+            
+
+
+            // Fungsi untuk menghapus semua marker
+            function clearMarkers() {
+                map.eachLayer(function (layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+            }
+
+            // // Tambahkan kontrol ke peta
+            // const clearButton = L.Control.extend({
+            //     onAdd: function() {
+            //         const div = L.DomUtil.create('div', 'custom-control leaflet-bar');
+            //         div.innerHTML = '<button onclick="clearMarkers()">Clear Markers</button>';
+            //         return div;
+            //     }
+            // });
+
+            // map.addControl(new clearButton());
+
+            // Fungsi untuk menghapus semua marker pengguna
+        // function clearMarkers() {
+        //     userMarkers.clearLayers(); // Hapus semua marker dari grup userMarkers
+        // }
+
+        // // Buat grup layer baru untuk marker pengguna
+        // const userMarkers = L.layerGroup().addTo(map);
+
             
             
 
@@ -122,10 +169,23 @@
                     console.log(data);
 
                     data.forEach(coordinate => {
-                    const marker = L.marker([parseFloat(coordinate.latitude), parseFloat(coordinate.longitude)]).addTo(map)
+
+                        const customIcon = L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/Romyadhy/PIck-Up-Project/main/location.png', // URL logo pickup
+                        iconSize: [50, 50], // Sesuaikan ukuran ikon jika diperlukan
+                        iconAnchor: [20, 36], // Sesuaikan anchor ikon jika diperlukan
+                        popupAnchor: [0, -32] // Sesuaikan popup anchor jika diperlukan
+                    });
+                    
+                    
+                    const marker = L.marker([parseFloat(coordinate.latitude), parseFloat(coordinate.longitude)], {
+                        icon: customIcon // Menggunakan ikon kustom sebagai marker
+                    }).addTo(map);
+                    // const marker = L.marker([parseFloat(coordinate.latitude), parseFloat(coordinate.longitude)]).addTo(map)
                     
                     marker.bindPopup(`
                     <b>${coordinate.name}</b>
+                    <br><img src="/images/${coordinate.image}" width="200" height="200">
                     <br><b>${coordinate.address}</b>
                     <br><a href="{{ url('/landing') }}">See Details</a>`
                     
@@ -149,9 +209,27 @@
             const searchIcon = L.DomUtil.create('div', 'leaflet-routing-icon leaflet-bar-part leaflet-bar-part-top-and-bottom fas fa-search');
             searchControl.getContainer().firstChild.appendChild(searchIcon);
 
+        //     const fullscreenControl = L.control.fullscreen({
+        //     position: 'topleft', // Atur posisi tombol Fullscreen
+        //     title: 'View Fullscreen' // Judul tooltip saat mouse hover pada tombol
+        // }).addTo(map);
 
-            
+        //     // Biarkan button "See in Fullscreen" tetap sama, tetapi fungsi onClick-nya ubah menjadi:
+        //     function fullScreen() {
+        //         fullscreenControl.toggleFullscreen(); // Menggunakan kontrol leaflet untuk masuk/mengeluarkan layar penuh
+        //     }
 
+                // const fullscreenControl = L.control.fullscreen({
+                //     position: 'bottomright', // Atur posisi tombol Fullscreen
+                //     title: 'View Fullscreen' // Judul tooltip saat mouse hover pada tombol
+                // }).addTo(map);
+
+                // function fullScreen() {
+                //     fullscreenControl.toggleFullscreen(); // Memanggil fungsi untuk masuk/mengeluarkan layar penuh
+                // }
+
+          
+           
 
 
              //Tes tt
@@ -170,6 +248,20 @@
                     startMarker.setLatLng(e.latlng);
                     endMarker = null;
                 }
+
+            //     const clearButton = L.Control.extend({
+            //     onAdd: function() {
+            //         const div = L.DomUtil.create('div', 'custom-control leaflet-bar');
+            //         div.innerHTML = '<button onclick="clearMarkers()">Clear Markers</button>';
+            //         return div;
+            //     }
+            // });
+
+          
+
+
+            // map.addControl(new clearButton());
+            
             }
 
             function calculateRoute() {
@@ -230,9 +322,14 @@
                         endMarker = null;
                     }
                 }
+                
+                
             }
-
             map.on('click', onMapClick);
+
+            
+
+      
 
 
 

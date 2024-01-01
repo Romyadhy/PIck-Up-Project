@@ -15,7 +15,7 @@ class birjonTesControlller extends Controller
      */
     public function index()
     {
-        $pick = Pick::orderBy('name', 'asc')->get();
+        $pick = Pick::orderBy('name', 'asc')->paginate(5);
         // dd($pick);
         return view('tes.adminJon', compact('pick'));
     }
@@ -45,6 +45,8 @@ class birjonTesControlller extends Controller
             'description' => 'required',
             'address' => 'required',
             'no_tlp' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'category_id' => 'required|exists:categories,id',
@@ -56,6 +58,8 @@ class birjonTesControlller extends Controller
             'description' => $data['description'],
             'address' => $data['address'],
             'no_tlp' => $data['no_tlp'],
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
             'latitude' => $data['latitude'],
             'longitude' => $data['longitude'],
             'category_id' => $data['category_id'],
@@ -113,6 +117,8 @@ class birjonTesControlller extends Controller
             'description' => 'required',
             'address' => 'required',
             'no_tlp' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'category_id' => 'required|exists:categories,id',
@@ -124,6 +130,8 @@ class birjonTesControlller extends Controller
         $pick->description = $data['description'];
         $pick->address = $data['address'];
         $pick->no_tlp = $data['no_tlp'];
+        $pick->start_time = $data['start_time'];
+        $pick->end_time = $data['end_time'];
         $pick->latitude = $data['latitude'];
         $pick->longitude = $data['longitude'];
         $pick->category_id = $data['category_id'];

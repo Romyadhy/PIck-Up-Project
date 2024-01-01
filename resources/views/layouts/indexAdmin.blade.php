@@ -25,6 +25,8 @@
     <!-- Tambahkan jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"> -->
+    {{-- Style Deskripsi --}}
+    
 </head>
 <body class="bg-gray-100 font-sans">
     @include('components.backtemplate')
@@ -38,10 +40,20 @@
 
     <!-- Script Leaflet.js -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    {{-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> --}}
+
     <script>
       
-  let table = new DataTable('#myTable');
+        // let table = new DataTable('#myTable');
+        
+        // tinymce.init({
+        //         selector: 'textarea#description',
+        //         plugins: 'advlist autolink lists link image charmap print preview hr anchor',
+        //         toolbar_mode: 'floating',
+        //         // Konfigurasi lainnya sesuai kebutuhan Anda
+        //     });
+    </script>
 
-</script>
+
 </body>
 </html>

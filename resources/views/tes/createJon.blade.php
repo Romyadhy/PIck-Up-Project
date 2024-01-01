@@ -30,7 +30,16 @@
                     <div class="mb-4">
                         <label for="no_tlp" class="block text-gray-700 font-bold mb-2">Phone Number</label>
                         <input type="text" name="no_tlp" id="no_tlp" class="form-input w-full border-2 border-slate-300" >
-                        
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="start_time" class="block text-gray-700 font-bold mb-2">Start time work</label>
+                        <input type="time" name="start_time" id="start_time" class="form-input w-full border-2 border-slate-300" >
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="end_time" class="block text-gray-700 font-bold mb-2">End time work</label>
+                        <input type="time" name="end_time" id="end_time" class="form-input w-full border-2 border-slate-300" >
                     </div>
 
                    <div class="mb-4">

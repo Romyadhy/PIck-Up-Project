@@ -10,11 +10,11 @@
                 
                 <a href="#" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> About </a>
                 
-                <a href="{{ url('landing') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Product </a>
+                <a href="{{ url('/birjonFront') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Product </a>
 
-                <a href="{{ url('maps') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Maps </a>
+                <a href="{{ url('/birjon') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Maps </a>
 
-                <a href="#" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Cookies </a>
+                {{-- <a href="#" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Cookies </a> --}}
             </div>
 
         </div>
@@ -22,7 +22,7 @@
         <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
 
         <div class="flex flex-col items-center sm:flex-row sm:justify-between">
-            <p class="text-sm text-gray-500 dark:text-gray-300">© Copyright 2023. All Rights Reserved.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-300">© Copyright 2024. All Rights Reserved.</p>
 
             <div class="flex -mx-2">
                 <a href="#" class="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400" aria-label="Reddit">

@@ -28,6 +28,8 @@ Route::get('/tes', function () {
 // });
 
 Route::get('/birjon', [tescontroller::class, 'index']);
+Route::get('/birjonFront', [tescontroller::class, 'display']);
+Route::get('/detailPro/{id}', [tescontroller::class, 'show'])->name('detilpro.show');
 
 
 Route::get('/', function () {
@@ -37,8 +39,8 @@ Route::get('/', function () {
 Route::get('/tesCoor', [tescontroller::class, 'tesCoor']);
 Route::get('/globe', [CoorController::class, 'getCoor']);
 
-Route::get('/landing', [LandingController::class, 'index']);
-Route::get('/detail/{id}', [LandingController::class, 'show'])->name('detil.show');
+// Route::get('/landing', [LandingController::class, 'index']);
+// Route::get('/detail/{id}', [LandingController::class, 'show'])->name('detil.show');
 
 
 Route::get('/maps', function (){
@@ -46,7 +48,7 @@ Route::get('/maps', function (){
 });
 
 
-Route::resource('/birjonAdmin', birjonTesControlller::class);
+
 
 
 Route::get('/dashboard', function () {
@@ -57,11 +59,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/get-now', [tescontroller::class, 'getNow'])->name('get.now');
     // Route::resource('/admin', AdminController::class);
 });
 
 Route::group(['middleware'=>'auth:sanctum'], function () {
     Route::resource('/admin', AdminController::class);
+    Route::resource('/birjonAdmin', birjonTesControlller::class);
     // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     // Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
     // Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');

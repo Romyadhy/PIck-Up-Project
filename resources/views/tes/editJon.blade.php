@@ -30,6 +30,14 @@
                         <label for="no_tlp" class="block text-gray-700 font-bold mb-2">Phone Number</label>
                         <input type="text" name="no_tlp" id="no_tlp" value="{{ $pick->no_tlp }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
                     </div>
+                    <div class="mb-4">
+                        <label for="start_time" class="block text-gray-700 font-bold mb-2">Start Time Work</label>
+                        <input type="time" name="start_time" id="start_time" value="{{ $pick->start_time }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="end_time" class="block text-gray-700 font-bold mb-2">End Time Work</label>
+                        <input type="time" name="end_time" id="end_time" value="{{ $pick->end_time }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                    </div>
 
                     <div class="mb-4">
                         <label for="category_id" class="block text-gray-700 font-bold mb-2">Category</label>
