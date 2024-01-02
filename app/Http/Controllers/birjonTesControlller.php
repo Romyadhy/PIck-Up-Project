@@ -16,8 +16,11 @@ class birjonTesControlller extends Controller
     public function index()
     {
         $pick = Pick::orderBy('name', 'asc')->paginate(5);
+        $category = Category::all();
         // dd($pick);
-        return view('tes.adminJon', compact('pick'));
+        // dd($category);
+
+        return view('tes.adminJon', compact('pick', 'category'));
     }
 
     /**

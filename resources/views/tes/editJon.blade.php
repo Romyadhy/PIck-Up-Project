@@ -2,6 +2,11 @@
 @section('content')
 <title>Edit Page</title>
 <section class="min-h-screen bg-gray-900">
+    <div class=" mx-[5rem] cursor-pointer ">
+        <a href="{{ url('/birjonAdmin') }}">
+            <i class="fas fa-arrow-left text-white hover:text-slate-400"></i> <!-- Ikon panah kembali -->
+        </a>
+    </div>
     <div class="max-w-2xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">

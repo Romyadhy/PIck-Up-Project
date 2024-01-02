@@ -44,11 +44,12 @@ class tescontroller extends Controller
         return view('tes.detailSee', compact('pick'));
     }
 
-    // public function getNow()
+    // public function getNow(Request $request)
     // {
     //     // Lakukan pengecekan otentikasi
     //     if (auth()->check()) {
     //         $pick = Pick::all();
+    //         dd($pick);
     //         // Jika terotentikasi, lakukan aksi yang diperlukan
     //         return view('tes.detailSee', compact('pick'));
     //     } else {
@@ -56,4 +57,23 @@ class tescontroller extends Controller
     //         return redirect()->route('login');
     //     }
     // }
+
+    // 
+    public function getNow(Request $request, $id)
+    {
+        if (auth()->check()) {
+            // Pengguna sudah login
+            $redirectTo = $request->session()->get('redirectTo', route('detilpro.show', ['id' => $id]));
+
+            // Tampilkan alert bahwa pengguna telah berhasil login
+            session()->flash('success', 'Anda telah berhasil login!');
+
+            // Redirect kembali ke halaman detailPro dengan ID yang sudah disimpan
+            return redirect($redirectTo);
+        } else {
+            // Pengguna belum login, arahkan ke halaman login
+            $request->session()->put('redirectTo', route('detilpro.show', ['id' => $id]));
+            return redirect()->route('login');
+        }
+    }
 }
