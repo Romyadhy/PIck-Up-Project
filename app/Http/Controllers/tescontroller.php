@@ -13,7 +13,7 @@ class tescontroller extends Controller
         // dd($tes);
         // $tes = Pick::with('category')->get();
         $tes = Pick::with('category')->get()->pluck('category')->unique('name')->sortBy('id');
-
+        // dd($tes);
         return view('tes.landingtes', compact('tes'));
     }
 

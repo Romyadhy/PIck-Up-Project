@@ -13,8 +13,21 @@ class birjonTesControlller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $searchTerm = $request->input('search');
+        $pickQuery = Pick::query();
+    
+        // Jika ada parameter pencarian 'search' dari permintaan HTTP GET
+        if ($searchTerm) {
+            $pickQuery->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'LIKE', '%' . $searchTerm . '%')
+                    ->orWhere('address', 'LIKE', '%' . $searchTerm . '%');
+                // Anda dapat menambahkan kondisi pencarian untuk kolom lain di sini
+            });
+        }
+
+
         $pick = Pick::orderBy('name', 'asc')->paginate(5);
         $category = Category::all();
         // dd($pick);

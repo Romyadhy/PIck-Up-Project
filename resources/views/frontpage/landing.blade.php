@@ -36,7 +36,7 @@
     <div class="lg:flex">
         <div class="flex items-center justify-center w-full px-6 py-8 lg:h-[32rem] lg:w-1/2">
             <div class="max-w-xl">
-                <h2 class="text-3xl font-semibold text-gray-800  lg:text-4xl">Picup<span class="text-blue-600 ">Pal</span></h2>
+                <h2 class="text-3xl font-semibold text-gray-800  lg:text-4xl">Picup<span class="text-gray-600 ">Pal</span></h2>
 
                 <p class="mt-4 text-sm text-gray-500  lg:text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis commodi cum cupiditate ducimus, fugit harum id necessitatibus odio quam quasi, quibusdam rem tempora voluptates.</p>
 
@@ -48,7 +48,7 @@
         </div>
 
         <div class="w-full h-64 lg:w-1/2 lg:h-auto my-[5rem]">
-            <div class="w-full h-full bg-cover" style="background-image: url(https://images.unsplash.com/photo-1508394522741-82ac9c15ba69?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=748&q=80)">
+            <div class="w-full h-full bg-cover" style="background-image: url(https://images.moneycontrol.com/static-mcnews/2020/12/maruti-suzuki-super-carry-72483_-770x433.jpg?impolicy=website&width=770&height=431)">
                 <div class="w-full h-full bg-black opacity-25"></div>
             </div>
         </div>
@@ -58,32 +58,100 @@
 <section class="bg-white " id="about">
     <div class="container px-6 py-10 mx-auto">
         <div class="text-center mb-[5rem]">
-            <h1 class="text-4xl font-semibold ">About <span class="text-blue-600 ">Us</span></h1>
+            <h1 class="text-4xl font-semibold ">About <span class="text-gray-600 ">Us</span></h1>
         </div>
         <div class="lg:-mx-6 lg:flex lg:items-center">
            
-            <img class="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]" src="https://images.unsplash.com/photo-1499470932971-a90681ce8530?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
+            <img class="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]" src="https://nitorentcar.com/assets/img/nitorentpickup-6.jpeg" alt="">
 
             <div class="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
-                <p class="text-5xl font-semibold text-blue-500 ">“</p>
+                <p class="text-5xl font-semibold text-gray-500 ">“</p>
 
                 <h1 class="text-2xl font-semibold text-gray-800  lg:text-3xl lg:w-96">
-                    Help us improve our productivity
+                    Ｗｅｌｃｏｍｅ ｔｏ ＰｉｃｕｐＰａｌ
                 </h1>
 
                 <p class="max-w-lg mt-6 text-gray-500  ">
-                    “ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
-                    tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
-                    aperiam dolorum, obcaecati corrupti aspernatur a. ”
+                    “ We are Typically Providing for pickups for moving houses, sudden trips, or delivering small goods. ”
                 </p>
 
-                <h3 class="mt-6 text-lg font-medium text-blue-500">Mia Brown</h3>
-                <p class="text-gray-600 ">Marketing Manager at Stech</p>
+                {{-- <h3 class="mt-6 text-lg font-medium text-blue-500">Mia Brown</h3>
+                <p class="text-gray-600 ">Marketing Manager at Stech</p> --}}
 
                 <div class="flex items-center justify-between mt-12 lg:justify-start">
                    
                 </div>
             </div>
+
+            
+        </div>
+        
+        {{-- Contack Us Section --}}
+        <section class="bg-white py-20" id="contact">
+            <div class="container mx-auto flex flex-col items-center">
+                <h1 class="text-4xl font-semibold mb-8">Contact <span class="text-blue-600">Us</span></h1>
+        
+                <div class="lg:w-1/2">
+                    <section class="ftco-section contact-section">
+                        <div class="container">
+                            <div class="row d-flex mb-5 contact-info">
+                                <div class="col-md-4">
+                                    <div class="row mb-5">
+                                        <div class="col-md-12">
+                                            <div class="border-2 w-100 p-4 rounded mb-2 d-flex">
+                                                <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                                                <span class="icon-map-o"></span>
+                                                <p class="ml-2">Bali, Buleleng jln Udayana </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="border-2 w-100 p-4 rounded mb-2 d-flex">
+                                                <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                                                <span class="icon-mobile-phone"></span>
+                                                <p class="ml-2"><a href="tel://082146684989">+ 082146684989</a></p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12">
+                                            <div class="border-2 w-100 p-4 rounded mb-2 d-flex">
+                                                <a href="mailto:undiksha@gmail.com" class="icon"> <i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                                                <p> <a href="mailto:undiksha@gmail.com">undiksha@gmail.com</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+        
+                    <div class="">
+                        <form action="#" class="bg-white p-6 rounded-lg shadow-md">
+                            <h2 class="text-2xl font-semibold mb-6 text-center">Send Message</h2>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-600 font-semibold mb-2">Your Name</label>
+                                <input type="text" id="name" name="name" class="w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-gray-500" placeholder="Your Name">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-600 font-semibold mb-2">Your Email</label>
+                                <input type="email" id="email" name="email" class="w-full border-2  border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-gray-500" placeholder="Your Email">
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-600 font-semibold mb-2">Message</label>
+                                <textarea name="message" id="message" cols="30" rows="5" class="w-full border-2  border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-gray-500" placeholder="Message"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="bg-gray-500 border-2  text-white font-semibold py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        
+
+          
         </div>
     </div>
 </section>
