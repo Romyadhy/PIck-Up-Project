@@ -38,7 +38,7 @@
             <div class="max-w-xl">
                 <h2 class="text-3xl font-semibold text-gray-800  lg:text-4xl">Picup<span class="text-gray-600 ">Pal</span></h2>
 
-                <p class="mt-4 text-sm text-gray-500  lg:text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis commodi cum cupiditate ducimus, fugit harum id necessitatibus odio quam quasi, quibusdam rem tempora voluptates.</p>
+                <p class="mt-4 text-sm text-gray-500  lg:text-base">Welcome to our pickup car rental service, PickupPal. A practical solution for hassle-free moving.</p>
 
                 <div class="flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row">
                     <a href="{{ url('/birjonFront') }}" class="block px-5 py-2 text-sm font-medium tracking-wider text-center text-white transition-colors duration-300 transform bg-gray-900 rounded-md hover:bg-gray-700">Explore Product</a>
@@ -65,7 +65,7 @@
             <img class="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]" src="https://nitorentcar.com/assets/img/nitorentpickup-6.jpeg" alt="">
 
             <div class="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
-                <p class="text-5xl font-semibold text-gray-500 ">“</p>
+                {{-- <p class="text-5xl font-semibold text-gray-500 ">“</p> --}}
 
                 <h1 class="text-2xl font-semibold text-gray-800  lg:text-3xl lg:w-96">
                     Ｗｅｌｃｏｍｅ ｔｏ ＰｉｃｕｐＰａｌ
@@ -74,6 +74,17 @@
                 <p class="max-w-lg mt-6 text-gray-500  ">
                     “ We are Typically Providing for pickups for moving houses, sudden trips, or delivering small goods. ”
                 </p>
+                <p class="max-w-lg mt-6 text-gray-500  ">
+                    PickupPal car rental is a service that allows you to rent pickup-type vehicles to move your belongings when you want to move house.
+                    <br>This website provides an online platform that makes it easy for you to search, book, and pay for pickup car rental quickly and easily.
+                    By using this service, you can rent a pickup car according to your needs and the desired duration of time. Pickup cars are usually equipped with ample cargo space, making them suitable for transporting household items during the moving process.
+                    <p  class="max-w-lg my-[0.3rem] text-gray-500">
+
+                        <br>These websites can display a wide selection of pickup cars from various service providers, providing information on rental rates, insurance options, and other requirements. In addition, some platforms may also provide scheduling features, order tracking, and reviews from previous users to help you make a more informed decision.
+                        With these pickup car rentals, you can save time and effort in the moving process, making it more efficient and convenient.
+                    </p>
+                </p>
+                
 
                 {{-- <h3 class="mt-6 text-lg font-medium text-blue-500">Mia Brown</h3>
                 <p class="text-gray-600 ">Marketing Manager at Stech</p> --}}

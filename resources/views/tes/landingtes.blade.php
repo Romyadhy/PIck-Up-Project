@@ -33,7 +33,9 @@
         <select id="category" onchange="updatePrice()" class="border-2 rounded-md px-4 py-2 bg-white text-gray-800 focus:outline-none focus:border-blue-500">
             <option value="">Select Category</option>
             @foreach($tes as $category)
-                <option value="{{ $category->id }}" data-price="{{ $category->price_per_km }}" class="py-2">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" 
+                    data-price="{{ $category->price_per_km }}" 
+                    class="py-2">{{ $category->name }}</option>
             @endforeach
         </select>
     </div>
@@ -310,7 +312,7 @@
 
                         // Tampilkan informasi harga
                         const priceInfo = document.getElementById('price');
-                        priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Total price: Rp ${totalPrice.toFixed(2)}`;
+                        priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Prediction price: Rp ${totalPrice.toFixed(2)}`;
                     });
                     // Menghapus marker jika sudah ada sebelumnya
                     if (startMarker) {

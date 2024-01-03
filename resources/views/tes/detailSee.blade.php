@@ -244,7 +244,7 @@
 
                 // Tampilkan informasi harga
                 const priceInfo = document.getElementById('price');
-                priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Total price: Rp ${totalPrice.toFixed(2)}`;
+                priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Prediction price: Rp ${totalPrice.toFixed(2)}`;
             } else {
                 // Tindakan yang diambil jika nilai pricePerKm tidak valid (misalnya, tampilkan pesan kesalahan)
                 console.error('Nilai price_per_km tidak valid');

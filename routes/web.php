@@ -28,9 +28,11 @@ Route::get('/tes', function () {
 // Route::get('/brodihisril', function () {
 //     return view('tes.landingtes');
 // });
-
+//bagian maps
 Route::get('/birjon', [tescontroller::class, 'index']);
+//bagian display product
 Route::get('/birjonFront', [tescontroller::class, 'display']);
+//baigan detail product
 Route::get('/detailPro/{id}', [tescontroller::class, 'show'])->name('detilpro.show');
 
 
@@ -53,9 +55,9 @@ Route::get('/maps', function (){
 
 
 
-Route::get('/dashboard', function () {
-    return view('welcome');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('welcome');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
