@@ -2,23 +2,15 @@
     <div class="container px-6 py-8 mx-auto">
         <div class="flex flex-col items-center text-center">
             <a href="#">
-                <h2 class="font bold text-2xl text-gray-200">Picup<span class="text-gray-500">Pal</span></h2>
+                <h2 class="font bold text-2xl text-white">Picup<span class="text-white">Pal</span></h2>
             </a>
-
             <div class="flex flex-wrap justify-center mt-6 -mx-4">
-                <a href="{{ url('/') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Home </a>
-                
+                <a href="{{ url('/') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Home </a>   
                 <a href="#" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> About </a>
-                
                 <a href="{{ url('/birjonFront') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Product </a>
-
                 <a href="{{ url('/birjon') }}" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Maps </a>
-
-                {{-- <a href="#" class="mx-4 text-sm text-gray-600 transition-colors duration-300 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400" aria-label="Reddit"> Cookies </a> --}}
             </div>
-
         </div>
-
         <hr class="my-6 border-gray-200 md:my-10 dark:border-gray-700" />
 
         <div class="flex flex-col items-center sm:flex-row sm:justify-between">

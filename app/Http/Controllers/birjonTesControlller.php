@@ -29,11 +29,11 @@ class birjonTesControlller extends Controller
 
 
         $pick = Pick::orderBy('name', 'asc')->paginate(5);
-        $category = Category::all();
+        $catGory = Category::all();
         // dd($pick);
         // dd($category);
 
-        return view('tes.adminJon', compact('pick', 'category'));
+        return view('tes.adminJon', compact('pick', 'catGory'));
     }
 
     /**
@@ -114,9 +114,9 @@ class birjonTesControlller extends Controller
     public function edit($id)
     {
         $pick = Pick::findOrFail($id);
-        $categories = Category::all(); // Mengambil semua kategori untuk dropdown
+        $catGory = Category::all(); // Mengambil semua kategori untuk dropdown
         // dd($pick);
-        return view('tes.editJon', compact('pick', 'categories'));
+        return view('tes.editJon', compact('pick', 'catGory'));
     }
 
     /**

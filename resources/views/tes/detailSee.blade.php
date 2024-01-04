@@ -19,41 +19,38 @@
             <h1 class="font-bold text-center text-5xl">Detail Product</h1>
         </div>
         
-        <div class="container px-6 py-16 mx-auto text-center">
-            <div class="max-w-lg mx-auto">
-                @if($pick)
-                    <h1 class="text-3xl font-semibold text-gray-800 lg:text-4xl">{{ $pick->name }}</h1>
-                    <p class="mt-6 text-gray-900">{{ $pick->description }}</p>
-                    
-                    <p class="mt-3 flex items-center text-sm text-gray-800">
-                        <i class="fas fa-map-marker-alt mr-2"></i> Address: {{ $pick->address }}
-                    </p>
-                    
-                    <p class="mt-3 flex items-center text-sm text-gray-800">
-                        <i class="fas fa-phone-alt mr-2"></i> Info Contact: {{ $pick->no_tlp }}
-                    </p>
-                    
-                    <p class="mt-3 flex items-center text-sm text-gray-800">
-                        <i class="fas fa-map-pin mr-2"></i> Latitude: {{ $pick->latitude }}
-                    </p>
-                    
-                    <p class="mt-3 flex items-center text-sm text-gray-800">
-                        <i class="fas fa-map-pin mr-2"></i> Longitude: {{ $pick->longitude }}
-                    </p>
-                    
-                    <p class="mt-3 flex items-center text-sm text-gray-800">
-                        <i class="fas fa-tag mr-2"></i> Category: {{ $pick->category->name }}
-                    </p>
-                    
-                    <p class="mt-3 text-sm text-white"><i class="fas fa-image mr-2"></i> Picture</p>
-                    
-                    <div class="flex justify-center mt-4">
-                        <img class="object-cover w-1/2 h-96 rounded-xl lg:w-full" src="{{ asset('images/'.$pick->image) }}" alt="imageProduct" />
-                    </div>
-                @endif
+        <div class="flex justify-center">
+            <div class="container px-6 py-16 mx-auto text-center flex items-center">
+                <div class="max-w-2xl mx-auto lg:flex lg:items-center">
+                    @if($pick)
+                        <div class="lg:w-1/2">
+                            <img class="object-cover mt-5 w-full h-96 rounded-xl lg:w-full lg:h-auto" src="{{ asset('images/'.$pick->image) }}" alt="imageProduct" />
+                            <p class="mt-2 text-gray-900">{{ $pick->description }}</p>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-8">
+                            <h1 class="text-3xl font-semibold text-gray-800 lg:text-4xl">{{ $pick->name }}</h1>
+                            <p class="mt-3 flex items-center text-sm text-gray-800">
+                                <i class="fas fa-map-marker-alt mr-2"></i> Address: {{ $pick->address }}
+                            </p>
+                            <p class="mt-3 flex items-center text-sm text-gray-800">
+                                <i class="fas fa-phone-alt mr-2"></i> Info Contact: {{ $pick->no_tlp }}
+                            </p>
+                            <p class="mt-3 flex items-center text-sm text-gray-800">
+                                <i class="fas fa-map-pin mr-2"></i> Latitude: {{ $pick->latitude }}
+                            </p>
+                            <p class="mt-3 flex items-center text-sm text-gray-800">
+                                <i class="fas fa-map-pin mr-2"></i> Longitude: {{ $pick->longitude }}
+                            </p>
+                            <p class="mt-3 flex items-center text-sm text-gray-800">
+                                <i class="fas fa-tag mr-2"></i> Category: {{ $pick->category->name }}
+                            </p>
+                            
+                            <p class="mt-3 text-sm text-white"><i class="fas fa-image mr-2"></i> Picture</p>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
-        
 
         <div class="text-white mb-4 text-center">
             <h2 class="font-semibold">See Location on Map</h2>
@@ -244,7 +241,7 @@
 
                 // Tampilkan informasi harga
                 const priceInfo = document.getElementById('price');
-                priceInfo.innerHTML = `Total distance: ${distance.toFixed(2)} km<br>Prediction price: Rp ${totalPrice.toFixed(2)}`;
+                priceInfo.innerHTML = `Total distance: ${distance.toFixed(3)} km<br>Prediction price: Rp ${totalPrice.toFixed(3)}`;
             } else {
                 // Tindakan yang diambil jika nilai pricePerKm tidak valid (misalnya, tampilkan pesan kesalahan)
                 console.error('Nilai price_per_km tidak valid');

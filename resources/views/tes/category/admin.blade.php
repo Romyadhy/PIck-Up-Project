@@ -12,7 +12,6 @@
         <div class="px-6 py-6 flex flex-col">
             <a href="{{ url('birjonAdmin') }}" class="my-4 text-gray-400 hover:text-gray-600 duration-300">Product</a>
             <a href="{{ url('/birjonAdminCategory') }}" class="my-4 text-gray-400 hover:text-gray-600 duration-300">Categoty</a>
-
         </div>
     </aside>
 
@@ -84,7 +83,7 @@
                         </form>
                     </div>
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('birjonAdminCategory.create') }}" type="button" id="createProductButton" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        <a href="javascript:void(0);" onclick="openModal('createCategorytModal')" type="button" id="createProductButton" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                             <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
@@ -137,8 +136,8 @@
                                 
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:red-500">
                                     <div class="flex items-center space-x-4 ">
-                                        <a href="{{ route('birjonAdminCategory.edit', $item->id) }}" type="button" data-drawer-target="drawer-update-product" data-drawer-show="drawer-update-product" aria-controls="drawer-update-product" class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-
-                                        300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800  ">
+                                        <a  onclick="openModal('editCategorytModal')" type="button" data-drawer-target="drawer-update-product" data-drawer-show="drawer-update-product" aria-controls="drawer-update-product" class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-
+                                        300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800  cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                                 <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
@@ -175,10 +174,120 @@
         </div>
     </main>
 </section>
+
+<section class="">
+    <!-- Modal Create -->
+    <div id="createCategorytModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-gray-900 bg-opacity-50 ">
+        <div class="flex items-center justify-center">
+            <div class="bg-white w-2/3 p-8 rounded shadow-lg ">
+                <!-- Tombol untuk menutup modal -->
+                <button onclick="closeModal('createCategorytModal')" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+    
+                <!-- Form Create -->
+                <section class="">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <h1 class="text-2xl font-semibold mb-4">Create Data Category</h1>
+        
+                        <form action="{{ route('birjonAdminCategory.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+        
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                                <input type="text" name="name" id="name" class="form-input w-full border-2 border-slate-300">
+                            </div>
+        
+                            <div class="mb-4">
+                                <label for="price_per_km" class="block text-gray-700 font-bold mb-2">Price per Kilometer</label>
+                                <textarea name="price_per_km" id="price_per_km" class="form-textarea w-full border-2 border-slate-300" rows="4"></textarea>
+                            </div>
+        
+                            <div class="flex item-center justify-center">
+                                <button type="submit" class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                                     Submit
+                                </button> 
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <div class="flex items-center justify-center mt-4">
+                    <button onclick="closeModal('createCategorytModal')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="">
+    <!-- Modal Create -->
+    <div id="editCategorytModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-gray-900 bg-opacity-50 ">
+        <div class="flex items-center justify-center">
+            <div class="bg-white w-2/3 p-8 rounded shadow-lg ">
+                <!-- Tombol untuk menutup modal -->
+                <button onclick="closeModal('editCategorytModal')" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+    
+                <!-- Form Create -->
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <h1 class="text-2xl font-semibold mb-4">Edit Data</h1>
+    
+                    <form action="{{ route('birjonAdminCategory.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+    
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                            <input type="text" name="name" id="name" value="{{ $item->name }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="price_per_km" class="block text-gray-700 font-bold mb-2">Price per Kilometer</label>
+                            <textarea name="price_per_km" id="price_per_km" class="form-textarea w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" rows="4">{{ $item->price_per_km }}</textarea>
+                        </div>
+    
+            
+                        <div class="flex item-center justify-center">
+                            <button type="submit" class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="flex items-center justify-center mt-4">
+                    <button onclick="closeModal('editCategorytModal')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                        Close
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</section>
+
 <script>
     function closeAlert() {
         const alert = document.getElementById('successAlert');
         alert.style.display = 'none';
+    }
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add('hidden');
     }
 </script>
 @endsection

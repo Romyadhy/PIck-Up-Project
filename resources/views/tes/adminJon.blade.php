@@ -12,6 +12,14 @@
         <div class="px-6 py-6 flex flex-col">
             <a href="{{ url('birjonAdmin') }}" class="my-4 text-gray-400 hover:text-gray-600 duration-300">Product</a>
             <a href="{{ url('/birjonAdminCategory') }}" class="my-4 text-gray-400 hover:text-gray-600 duration-300">Categoty</a>
+            <!-- Contoh penggunaan tombol untuk toggle mode -->
+            {{-- <div class="text-center mt-4">
+                <button onclick="toggleMode()" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    Toggle Mode
+                </button>
+            </div> --}}
+
+            
 
         </div>
     </aside>
@@ -69,31 +77,20 @@
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
-                    <div class="w-full md:w-1/2">
-                        <form method="GET" class="flex items-center" action="{{ route('birjonAdmin.index') }}">
-                            <label for="simple-search"  class="sr-only">Search</label>
-                            <div class="relative w-full">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-                                    </svg>
-                                </div>
-                                <input name="search" type="text" id="simple-search" placeholder="Search for products"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            </div>
-                        </form>
-                    </div>
+                    
                     <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                        <a href="{{ route('birjonAdmin.create') }}" type="button" id="createProductButton" data-modal-toggle="createProductModal" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                            <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <a href="javascript:void(0);" onclick="openModal('createProductModal')" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                            <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                             </svg>
                             Add product
                         </a>
+                        
                       
                     </div>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 " id="myTable">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr class="text-center">
                                 <th scope="col" class="p-4">No</th>
@@ -143,17 +140,14 @@
                                 
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white hover:red-500">
                                     <div class="flex items-center space-x-4 ">
-                                        <a href="{{ route('birjonAdmin.edit', $item->id) }}" type="button" data-drawer-target="drawer-update-product" data-drawer-show="drawer-update-product" aria-controls="drawer-update-product" class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-
-                                        300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800  ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        {{-- @foreach ($pick as $item)  --}}
+                                        <a onclick="openEditModal('editProductModal')" data-id="{{ $item->id }}" class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer">
+                                            {{-- <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                                 <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
-                                            </svg>
+                                            </svg> --}}
                                             Edit
                                         </a>
-                                        {{-- @foreach($pick as $pic)
-                                        @endforeach
-                                            <a href="{{ route('birjonAdmin.edit', $pic->id) }}">Edit</a> --}}
                                         
 
                                         <form action="{{ route('birjonAdmin.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you ready to delete this data')" class="d-inline">
@@ -172,20 +166,408 @@
                         </tbody>
                        
                     </table>
-                    {{ $pick->links() }}
+                    {{-- {{ $pick->links() }} --}}
                        
                 </div>
-                {{-- <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-                </nav> --}}
+                
             </div>
         </div>
         
     </main>
 </section>
+
+{{-- Tes MODAL --}}
+<section class="">
+    <!-- Modal Create -->
+    <div id="createProductModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-gray-900 bg-opacity-50 ">
+        <div class="flex items-center justify-center">
+            <div class="bg-white w-2/3 p-8 rounded shadow-lg ">
+                <!-- Tombol untuk menutup modal -->
+                <button onclick="closeModal('createProductModal')" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+    
+                <!-- Form Create -->
+                <section class="">
+                    <form action="{{ route('birjonAdmin.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+        
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                            <input type="text" name="name" id="name" class="form-input w-full border-2 border-slate-300">
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
+                            <textarea name="description" id="description" class="form-textarea w-full border-2 border-slate-300" rows="4"></textarea>
+                        </div>
+        
+        
+                        <div class="mb-4">
+                            <label for="address" class="block text-gray-700 font-bold mb-2">Address</label>
+                            <input type="text" name="address" id="address" class="form-input w-full border-2 border-slate-300" >
+                         
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="no_tlp" class="block text-gray-700 font-bold mb-2">Phone Number</label>
+                            <input type="text" name="no_tlp" id="no_tlp" class="form-input w-full border-2 border-slate-300" >
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="start_time" class="block text-gray-700 font-bold mb-2">Start time work</label>
+                            <input type="time" name="start_time" id="start_time" class="form-input w-full border-2 border-slate-300" >
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="end_time" class="block text-gray-700 font-bold mb-2">End time work</label>
+                            <input type="time" name="end_time" id="end_time" class="form-input w-full border-2 border-slate-300" >
+                        </div>
+        
+                       <div class="mb-4">
+                            <label for="category_id" class="block text-gray-700 font-bold mb-2">Category</label>
+                            <select name="category_id" id="category_id" class="form-select w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                                @foreach($catGory as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+        
+                        <div id="map" style="height: 500px;"></div>
+        
+                        <div class="mb-4">
+                            <label for="latitude" class="block text-gray-700 font-bold mb-2">Latitude</label>
+                            <input type="text" name="latitude" id="latitude" class="form-input w-full border-2 border-slate-300" >
+                            
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="longitude" class="block text-gray-700 font-bold mb-2">Longitude</label>
+                            <input type="text" name="longitude" id="longitude" class="form-input w-full border-2 border-slate-300" >
+                           
+                        </div>
+        
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 font-bold mb-2">Image</label>
+                            <input type="file" name="image" id="image" class="form-input w-full border-2 border-slate-300" >
+                            </p>
+                        
+                        </div>
+        
+                        <div class="flex item-center justify-center">
+                            <button type="submit" class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                                 Submit
+                            </button> 
+                        </div>
+                    </form>
+                </section>
+                {{-- Form Edit --}}
+                {{-- <section>
+                    <form action="{{ route('birjonAdmin.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+    
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                            <input type="text" name="name" id="name" value="{{ $item->name }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
+                            <textarea name="description" id="description" class="form-textarea w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" rows="4">{{ $item->description }}</textarea>
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="address" class="block text-gray-700 font-bold mb-2">Address</label>
+                            <input type="text" name="address" id="address" value="{{ $item->address }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="no_tlp" class="block text-gray-700 font-bold mb-2">Phone Number</label>
+                            <input type="text" name="no_tlp" id="no_tlp" value="{{ $item->no_tlp }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="start_time" class="block text-gray-700 font-bold mb-2">Start Time Work</label>
+                            <input type="time" name="start_time" id="start_time" value="{{ $item->start_time }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="end_time" class="block text-gray-700 font-bold mb-2">End Time Work</label>
+                            <input type="time" name="end_time" id="end_time" value="{{ $item->end_time }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="category_id" class="block text-gray-700 font-bold mb-2">Category</label>
+                            <select name="category_id" id="category_id" class="form-select w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                                @foreach($catGory as $category)
+                                    <option value="{{ $category->id }}" {{ $item->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+    
+                        <div id="map" style="height: 500px;"></div>
+    
+                        <div class="mb-4">
+                            <label for="latitude" class="block text-gray-700 font-bold mb-2">Latitude</label>
+                            <input type="text" name="latitude" id="latitude" value="{{ $item->latitude }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="longitude" class="block text-gray-700 font-bold mb-2">Longitude</label>
+                            <input type="text" name="longitude" id="longitude" value="{{ $item->longitude }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                       
+    
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 font-bold mb-2">Current Image</label>
+                            <img src="{{ asset('images/'.$item->image) }}" alt="Current Image" class="h-40 w-40 object-cover">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 font-bold mb-2">New Image</label>
+                            <input type="file" name="image" id="image" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+                        
+                        <div class="flex item-center justify-center">
+                            <button type="submit" class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </section> --}}
+               
+                
+                <div class="flex items-center justify-center mt-4">
+                    <button onclick="closeModal('createProductModal')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{{-- Modal Edit --}}
+{{-- Tes MODAL --}}
+<section class="">
+    
+    <!-- Modal Create -->
+    <div id="editProductModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-gray-900 bg-opacity-50 ">
+        <div class="flex items-center justify-center">
+            <div class="bg-white w-2/3 p-8 rounded shadow-lg ">
+                <!-- Tombol untuk menutup modal -->
+                <button onclick="closeModal('editProductModal')" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+    
+                <!-- Form Edit-->
+                {{-- @include('tes.editJon') --}}
+                <section class="">
+                    <form action="{{ route('birjonAdmin.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+    
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                            <input type="text" name="name" id="name" value="{{ $item->name }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="description" class="block text-gray-700 font-bold mb-2">Description</label>
+                            <textarea name="description" id="description" class="form-textarea w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" rows="4">{{ $item->description }}</textarea>
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="address" class="block text-gray-700 font-bold mb-2">Address</label>
+                            <input type="text" name="address" id="address" value="{{ $item->address }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="no_tlp" class="block text-gray-700 font-bold mb-2">Phone Number</label>
+                            <input type="text" name="no_tlp" id="no_tlp" value="{{ $item->no_tlp }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="start_time" class="block text-gray-700 font-bold mb-2">Start Time Work</label>
+                            <input type="time" name="start_time" id="start_time" value="{{ $item->start_time }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+                        <div class="mb-4">
+                            <label for="end_time" class="block text-gray-700 font-bold mb-2">End Time Work</label>
+                            <input type="time" name="end_time" id="end_time" value="{{ $item->end_time }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="category_id" class="block text-gray-700 font-bold mb-2">Category</label>
+                            <select name="category_id" id="category_id" class="form-select w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                                @foreach($catGory as $category)
+                                    <option value="{{ $category->id }}" {{ $item->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+    
+                        <div id="mapEdit" style="height: 500px;"></div>
+    
+                        <div class="mb-4">
+                            <label for="latitude" class="block text-gray-700 font-bold mb-2">Latitude</label>
+                            <input type="text" name="latitude" id="latitude" value="{{ $item->latitude }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                        <div class="mb-4">
+                            <label for="longitude" class="block text-gray-700 font-bold mb-2">Longitude</label>
+                            <input type="text" name="longitude" id="longitude" value="{{ $item->longitude }}" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+    
+                       
+    
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 font-bold mb-2">Current Image</label>
+                            <img src="{{ asset('images/'.$item->image) }}" alt="Current Image" class="h-40 w-40 object-cover">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 font-bold mb-2">New Image</label>
+                            <input type="file" name="image" id="image" class="form-input w-full border-2 border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500">
+                        </div>
+                        
+                        <div class="flex item-center justify-center">
+                            <button type="submit" class="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </section>
+               
+                
+                {{-- <div class="flex items-center justify-center mt-4">
+                    <button onclick="closeModal('editProductModal')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                        Close
+                    </button>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
 <script>
+    
+    // // Maps Create Data
+        // Inisialisasi peta dengan view di Bali
+        var map = L.map('map').setView([-8.409518, 115.188919], 10);
+
+        // Tambahkan peta tile (misal: OpenStreetMap)
+        L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        }).addTo(map);
+
+        // Tambahkan marker saat mengklik peta
+        var marker = L.marker([0, 0]).addTo(map);
+        map.on('click', function(e) {
+            marker.setLatLng(e.latlng); // Set marker di titik yang diklik
+            // Isi input latitude dan longitude di form dengan nilai baru
+            document.getElementById('latitude').value = e.latlng.lat;
+            document.getElementById('longitude').value = e.latlng.lng;
+        });
+
+        //Maps Edit
+     // Inisialisasi peta dengan view di Bali
+     var map = L.map('mapEdit').setView([-8.409518, 115.188919], 15);
+
+        // Tambahkan peta tile (misal: OpenStreetMap)
+        L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
+            maxZoom: 20,
+            subdomains:['mt0','mt1','mt2','mt3']
+        }).addTo(map);
+
+        // Tambahkan marker pada lokasi lama (old value)
+        var oldLatitude = parseFloat("{{ $item->latitude }}");
+        var oldLongitude = parseFloat("{{ $item->longitude }}");
+
+        var marker = L.marker([oldLatitude, oldLongitude]).addTo(map);
+
+
+        // Hapus marker saat mengklik peta
+        map.on('click', function(e) {
+            if (marker) {
+                map.removeLayer(marker); // Hapus marker lama
+            }
+
+            // Tambahkan marker baru di lokasi yang diklik pengguna
+            marker = L.marker(e.latlng).addTo(map);
+            
+            // Isi input latitude dan longitude di form dengan nilai baru
+            document.getElementById('latitude').value = e.latlng.lat;
+            document.getElementById('longitude').value = e.latlng.lng;
+        });
+
     function closeAlert() {
         const alert = document.getElementById('successAlert');
         alert.style.display = 'none';
     }
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add('hidden');
+    }
+
+    function openEditModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('hidden');
+        } else {
+            console.error(`Modal dengan ID ${modalId} tidak ditemukan.`);
+        }
+    }
+
+    function closeEditModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('hidden');
+        } else {
+            console.error(`Modal dengan ID ${modalId} tidak ditemukan.`);
+        }
+    }
+
+    // Dapatkan referensi ke elemen HTML
+        const html = document.querySelector('main');
+
+        // Fungsi untuk mengaktifkan mode terang
+        function enableLightMode() {
+            html.classList.remove('dark');
+            html.classList.add('light');
+        }
+
+        // Fungsi untuk mengaktifkan mode gelap
+        function enableDarkMode() {
+            html.classList.remove('light');
+            html.classList.add('dark');
+        }
+
+        // Fungsi untuk toggle antara mode terang dan gelap
+        function toggleMode() {
+            if (html.classList.contains('dark')) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
+        }
+
+
+
+
+
 </script>
+
+
+
 @endsection

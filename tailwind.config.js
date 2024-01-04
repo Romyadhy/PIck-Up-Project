@@ -16,5 +16,7 @@ module.exports = {
         },
     },
 
+    darkMode: 'class', // Tambahkan properti darkMode dengan nilai 'class'
+
     plugins: [require('@tailwindcss/forms')],
 };
